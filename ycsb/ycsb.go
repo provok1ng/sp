@@ -19,8 +19,8 @@ type SwiftClient interface {
 	Write(int64, []byte)
 }
 
-func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderless bool, args string) swiftClient {
-	var sc swiftClient
+func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderless bool, args string) SwiftClient {
+	var sc SwiftClient
 
 	l := newLogger("out")
 	c := client.NewClientLog(collocated, maddr, mport, fast, leaderless, false, l)
