@@ -11,7 +11,7 @@ import (
 	"github.com/provok1ng/sp/dlog"
 )
 
-type swiftClient interface {
+type SwiftClient interface {
 	Connect() error
 	Disconnect()
 	Read(int64) []byte
