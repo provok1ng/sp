@@ -24,7 +24,7 @@ func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderl
 
 	l := newLogger("out")
 	c := client.NewClientLog(collocated, maddr, mport, fast, leaderless, false, l)
-	b := client.NewBufferClient(c, 0, 0, 0, 0, 0)
+	b := client.NewBufferClient(c, 1, 1024, 0, 5, 0)
 
 	if err := b.Connect(); err != nil {
 		log.Fatal(err)
@@ -35,12 +35,7 @@ func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderl
 		sc = b
 		b.WaitReplies(b.ClosestId)
 	case "swift":
-		num, err := strconv.Atoi(args)
-		if err != nil {
-			sc=b
-			return sc
-		}
-		sc = swift.NewClient(b, num)
+		sc = swift.NewClient(b, 1)
 	case "curp":
 		num, err := strconv.Atoi(args)
 		if err != nil {
