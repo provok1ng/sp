@@ -34,7 +34,7 @@ func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderl
 	case "client":
 		sc = b
 		b.WaitReplies(b.ClosestId)
-	case "SwiftPaxos":
+	case "swiftpaxos":
 		sc = swift.NewClient(b, 1)
 	case "curp":
 		num, err := strconv.Atoi(args)
