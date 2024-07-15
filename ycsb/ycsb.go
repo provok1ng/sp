@@ -1,6 +1,7 @@
 package ycsb
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -23,12 +24,16 @@ func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderl
 	var sc SwiftClient
 
 	l := newLogger("out")
+	fmt.Println("5")
 	c := client.NewClientLog(collocated, maddr, mport, fast, leaderless, false, l)
+	fmt.Println("1")
 	b := client.NewBufferClient(c, 1, 1024, 0, 5, 0)
+	fmt.Println("2")
 
 	if err := b.Connect(); err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("3")
 
 	switch protocol {
 	case "client":
@@ -36,6 +41,7 @@ func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderl
 		b.WaitReplies(b.ClosestId)
 	case "swiftpaxos":
 		sc = swift.NewClient(b, 1)
+		fmt.Println("4")
 	case "curp":
 		num, err := strconv.Atoi(args)
 		if err != nil {
