@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 
 	"github.com/provok1ng/sp/client"
 	"github.com/provok1ng/sp/curp"
@@ -43,12 +42,7 @@ func NewswiftClient(protocol, collocated, maddr string, mport int, fast, leaderl
 		sc = swift.NewClient(b, 1)
 		fmt.Errorf("4")
 	case "curp":
-		num, err := strconv.Atoi(args)
-		if err != nil {
-			sc=b
-			return sc
-		}
-		sc = curp.NewClient(b, 0, 0, num)
+		sc = curp.NewClient(b, 7, 50000, 0)
 	}
 
 	return sc
